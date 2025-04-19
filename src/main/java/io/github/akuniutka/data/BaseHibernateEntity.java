@@ -1,4 +1,4 @@
-package io.github.akuniutka;
+package io.github.akuniutka.data;
 
 import com.fasterxml.uuid.Generators;
 import jakarta.persistence.Id;
@@ -9,16 +9,16 @@ import java.util.Objects;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class BaseJpaEntity {
+public abstract class BaseHibernateEntity {
 
     @Id
     private UUID id;
 
-    protected BaseJpaEntity() {
+    protected BaseHibernateEntity() {
         this(Generators.timeBasedEpochGenerator().generate());
     }
 
-    protected BaseJpaEntity(final UUID id) {
+    protected BaseHibernateEntity(final UUID id) {
         Objects.requireNonNull(id);
         this.id = id;
     }
@@ -44,7 +44,7 @@ public abstract class BaseJpaEntity {
         if (thisEffectiveClass != objEffectiveClass) {
             return false;
         }
-        final BaseJpaEntity entity = (BaseJpaEntity) obj;
+        final BaseHibernateEntity entity = (BaseHibernateEntity) obj;
         return Objects.equals(getId(), entity.getId());
     }
 
