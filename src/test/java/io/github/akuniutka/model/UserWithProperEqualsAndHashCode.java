@@ -1,6 +1,6 @@
 package io.github.akuniutka.model;
 
-import io.github.akuniutka.BaseJpaEntity;
+import io.github.akuniutka.data.BaseHibernateEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToOne;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "users_proper")
 @Getter
 @Setter
-public class UserWithProperEqualsAndHashCode extends BaseJpaEntity {
+public class UserWithProperEqualsAndHashCode extends BaseHibernateEntity {
 
     private String name;
     private int age;
