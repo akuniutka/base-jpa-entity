@@ -1,4 +1,4 @@
-# Base JPA Entity
+# Hibernate Base Entity
 
 A base class for Hibernate-managed JPA entities with proper 
 implementations of `equals()` and `hashCode()`. Inspired by 
@@ -11,7 +11,7 @@ entities:
 - HashSet and HashMap incorrectly work with the entities,
 - Hibernate may load data for lazy fields where not intended.
 
-The new superclass solves both of the problems.
+The new superclass solves both of these problems.
 
 # How to use
 
