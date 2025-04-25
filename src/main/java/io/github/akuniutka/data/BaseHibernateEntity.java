@@ -1,7 +1,6 @@
 package io.github.akuniutka.data;
 
 import com.fasterxml.uuid.Generators;
-import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import org.hibernate.proxy.HibernateProxy;
@@ -23,8 +22,6 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class BaseHibernateEntity {
 
-    private static final TimeBasedEpochGenerator uuidGenerator = Generators.timeBasedEpochGenerator();
-
     @Id
     private UUID id;
 
@@ -37,7 +34,7 @@ public abstract class BaseHibernateEntity {
      * to the entity on its creation.
      */
     protected BaseHibernateEntity() {
-        this(uuidGenerator.generate());
+        this(Generators.timeBasedEpochGenerator().generate());
     }
 
     protected BaseHibernateEntity(final UUID id) {
