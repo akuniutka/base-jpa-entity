@@ -2,10 +2,12 @@
 
 A base class for Hibernate-managed JPA entities with proper 
 implementations of `equals()` and `hashCode()`. Inspired by 
-[Andrey Oganesyan](https://github.com/andreyoganesyan)'s and 
-[Georgii Vlasov](https://github.com/honest-niceman)'s posts 
+[Andrey Oganesyan](https://github.com/andreyoganesyan)'s, 
+[Georgii Vlasov](https://github.com/honest-niceman)'s, 
+[Thorben Janssen](https://github.com/thjanssen)'s posts 
 ([1](https://habr.com/ru/companies/haulmont/articles/564682/), 
-[2](https://tinyurl.com/4uaecbzy)) on side effects that Lombok's 
+[2](https://tinyurl.com/4uaecbzy), [3](https://tinyurl.com/mx4msnvu)) 
+on side effects that Lombok's 
 `@EqualsAndHashCode` annotation brings in when applied to such 
 entities:
 - HashSet and HashMap incorrectly work with the entities,
