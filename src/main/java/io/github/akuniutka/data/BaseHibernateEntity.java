@@ -3,7 +3,11 @@ package io.github.akuniutka.data;
 import com.fasterxml.uuid.Generators;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Transient;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.data.domain.Persistable;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -20,10 +24,18 @@ import java.util.UUID;
  * @version 1.0
  */
 @MappedSuperclass
-public abstract class BaseHibernateEntity {
+public abstract class BaseHibernateEntity implements Persistable<UUID> {
 
     @Id
     private UUID id;
+
+    /*
+     * Implement Persistable<ID>.isNew() to help Spring to identify whether
+     * the entity is new or was persisted already. Thus save one SELECT-query
+     * to the database when saving the entity for the first time.
+     */
+    @Transient
+    private boolean isNew;
 
     /*
      * Generate id for the entity and do not leave it to Hibernate
@@ -40,10 +52,22 @@ public abstract class BaseHibernateEntity {
     protected BaseHibernateEntity(final UUID id) {
         Objects.requireNonNull(id);
         this.id = id;
+        this.isNew = true;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+
+    @PostLoad
+    @PrePersist
+    void trackNotNew() {
+        this.isNew = false;
     }
 
     /*
